@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chris Eck — Contact</title>
+
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    :root{
+      --bg: #000000;
+
+      /* dark, warm */
+      --panel: rgba(18,18,18,.92);
+      --stroke: rgba(255,255,255,.12);
+      --text: #f5f2ea;
+      --muted: rgba(245,242,234,.72);
+
+      --row: linear-gradient(135deg, rgba(24,24,24,.96), rgba(16,16,16,.94));
+      --rowHover: linear-gradient(135deg, rgba(30,30,30,.98), rgba(20,20,20,.96));
+
+      --shadow: 0 18px 55px rgba(0,0,0,.6);
+      --blur: blur(14px);
+      --nav-content-pad: 72px;
+      --font-body: "Montserrat", "Trebuchet MS", sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      background: var(--bg);
+      color:var(--text);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a{
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(8,8,8,.7);
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .nav-shell{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .links{
+      display: flex;
+      gap: 18px;
+      font-size: 16px;
+    }
+
+    .links a{
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+
+    .links a:hover{
+      border-color: var(--stroke);
+      background: rgba(255,255,255,.06);
+    }
+
+    details.menu{
+      display: none;
+      position: relative;
+    }
+
+    details.menu summary{
+      list-style: none;
+      cursor: pointer;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+    }
+
+    details.menu summary::-webkit-details-marker{ display: none; }
+
+    .burger{
+      width: 20px;
+      height: 14px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .burger span{
+      display:block;
+      height: 2px;
+      background: var(--text);
+      border-radius: 999px;
+    }
+
+    .menu-panel{
+      position: absolute;
+      right: 0;
+      top: 52px;
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      padding: 10px;
+      min-width: 160px;
+      box-shadow: var(--shadow);
+    }
+
+    .menu-panel a{
+      display: block;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .menu-panel a:hover{
+      background: rgba(255,255,255,.08);
+    }
+
+    .page{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      padding: var(--nav-content-pad) 12px 22px;
+    }
+
+    .page-head{
+      margin: 6px auto 12px;
+      text-align: center;
+    }
+
+    .wrap{ width:min(720px, 100%); }
+
+    .panel{
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+    }
+
+    .top{
+      padding: 14px 14px 12px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(20,20,20,.85);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+    }
+
+    .avatar{
+      width:56px;
+      height:56px;
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: #1b1b1b;
+      flex: 0 0 auto;
+      box-shadow: 0 10px 22px rgba(0,0,0,.55);
+    }
+
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: 50% 18%;
+      display:block;
+    }
+
+    .title h1{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: .2px;
+      line-height:1.15;
+    }
+
+    .title .tag{
+      margin-top:4px;
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .content{ padding: 10px 10px 14px; }
+
+    .section{ margin: 10px 0 12px; }
+
+    .sectionHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 6px 6px 8px;
+      color: var(--text);
+    }
+
+    .sectionHead .name{
+      font-weight: 760;
+      letter-spacing: .2px;
+      font-size: 13px;
+    }
+
+    .sectionHead .hint{
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding: 0 4px;
+    }
+
+    a.row, button.rowBtn{
+      text-decoration:none;
+      color: inherit;
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: var(--row);
+      transition: transform .08s ease, border-color .18s ease, background .18s ease;
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+    }
+
+    a.row:hover, button.rowBtn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.3);
+      background: var(--rowHover);
+    }
+
+    /* icon */
+    .icon{
+      width:44px;
+      height:44px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255,255,255,.18);
+      background: linear-gradient(135deg, #222222, #1a1a1a);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+    }
+
+    .icon img, .icon svg{
+      width:22px;
+      height:22px;
+      display:block;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,.18));
+    }
+
+    .iconMail{
+      background: radial-gradient(26px 26px at 30% 25%, rgba(96,165,250,.25), rgba(20,20,20,.9));
+      border: 1px solid rgba(96,165,250,.28);
+    }
+
+    .iconPhone{
+      background: radial-gradient(26px 26px at 30% 25%, rgba(34,197,94,.25), rgba(20,20,20,.9));
+      border: 1px solid rgba(34,197,94,.24);
+    }
+
+    .meta{ min-width:0; flex: 1 1 auto; }
+    .meta .label{
+      margin:0;
+      font-size: 15px;
+      font-weight: 760;
+      line-height:1.1;
+    }
+    .meta .sub{
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .chev{
+      opacity:.65;
+      font-size: 18px;
+      padding: 0 4px;
+      flex:0 0 auto;
+    }
+
+    /* Download row = special */
+    .downloadRow{
+      justify-content:center;
+      gap:10px;
+      text-align:center;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+    .downloadRow .dlText{
+      font-size: 15px;
+      font-weight: 820;
+    }
+    .downloadRow .icon{
+      width:40px;
+      height:40px;
+      background: rgba(255,255,255,.08);
+    }
+
+    button.rowBtn{
+      width:100%;
+      cursor:pointer;
+      border: 1px solid rgba(255,255,255,.16);
+    }
+
+    /* subtle divider between personal + org */
+    .divider{
+      margin: 14px 6px 6px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      opacity:.9;
+    }
+
+    /* tighten on small phones */
+    @media (max-width: 420px){
+      .page{ padding: calc(var(--nav-content-pad) - 10px) 10px 18px; }
+      .content{ padding: 8px 8px 12px; }
+      .top{ padding: 12px 12px 10px; }
+      .avatar{ width:52px; height:52px; border-radius: 15px; }
+      .title h1{ font-size: 17px; }
+      a.row, button.rowBtn{ padding: 11px 11px; border-radius: 15px; }
+      .icon{ width:42px; height:42px; }
+      .meta .label{ font-size: 14px; }
+    }
+
+    @media (max-width: 720px){
+      .links{ display: none; }
+      details.menu{ display: block; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESFM9WKBF9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ESFM9WKBF9');
+  </script>
+</head>
+
+<body>
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-shell">
+      <div class="links">
+        <a href="/">Home</a>
+        <a href="/contact/">Contact</a>
+      </div>
+      <details class="menu">
+        <summary aria-label="Open menu">
+          <span class="burger" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </summary>
+        <div class="menu-panel" role="menu">
+          <a role="menuitem" href="/">Home</a>
+          <a role="menuitem" href="/contact/">Contact</a>
+        </div>
+      </details>
+    </div>
+  </nav>
+  <div class="page">
+    <main class="wrap">
+      <section class="panel">
+        <header class="top">
+          <div class="title">
+            <h1>Chris Eck</h1>
+            <div class="tag">CONTENT CREATOR</div>
+          </div>
+        </header>
+
+        <div class="content">
+
+          <!-- CONTACT CARD DOWNLOAD -->
+          <section class="section">
+            <div class="sectionHead"></div>
+            <div class="list">
+              <button class="rowBtn downloadRow" id="downloadVcfBtn" type="button">
+                <span class="icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 3v10" stroke="white" stroke-width="1.7" stroke-linecap="round"/>
+                    <path d="M8.5 10.5 12 13.9l3.5-3.4" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4.5 17.5c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2" stroke="white" stroke-width="1.7" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="dlText">Download Contact Info</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- WEBSITE -->
+          <section class="section">
+            <div class="sectionHead">
+              <div class="name">Website</div>
+              <div class="hint">Main</div>
+            </div>
+            <div class="list">
+              <a class="row" href="https://chrishasdeals.com" target="_blank" rel="noopener">
+                <span class="icon" aria-hidden="true">
+                  <img alt="Website" src="https://cdn.simpleicons.org/safari/FFFFFF" />
+                </span>
+                <span class="meta">
+                  <p class="label">Website</p>
+                  <p class="sub">chrishasdeals.com</p>
+                </span>
+                <span class="chev">›</span>
+              </a>
+            </div>
+          </section>
+
+          <!-- EMAIL -->
+          <section class="section">
+            <div class="sectionHead">
+              <div class="name">Email</div>
+              <div class="hint">Contact</div>
+            </div>
+            <div class="list">
+              <a class="row" href="mailto:chris@chrishasdeals.com" rel="noopener">
+                <span class="icon iconMail" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4.5 7.5h15c.828 0 1.5.672 1.5 1.5v9c0 .828-.672 1.5-1.5 1.5h-15C3.672 19.5 3 18.828 3 18V9c0-.828.672-1.5 1.5-1.5Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M4.2 9.1 12 13.8l7.8-4.7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="meta">
+                  <p class="label">Personal Email</p>
+                  <p class="sub">chris@chrishasdeals.com</p>
+                </span>
+                <span class="chev">›</span>
+              </a>
+              <a class="row" href="mailto:collabs@chrishasdeals.com" rel="noopener">
+                <span class="icon iconMail" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4.5 7.5h15c.828 0 1.5.672 1.5 1.5v9c0 .828-.672 1.5-1.5 1.5h-15C3.672 19.5 3 18.828 3 18V9c0-.828.672-1.5 1.5-1.5Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M4.2 9.1 12 13.8l7.8-4.7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="meta">
+                  <p class="label">Affiliate & Collabs</p>
+                  <p class="sub">collabs@chrishasdeals.com</p>
+                </span>
+                <span class="chev">›</span>
+              </a>
+            </div>
+          </section>
+
+          <!-- SOCIAL -->
+          <section class="section">
+            <div class="sectionHead">
+              <div class="name">Social</div>
+              <div class="hint">Follow</div>
+            </div>
+
+            <div class="list">
+              <a class="row" href="https://www.tiktok.com/@chrishasdeals" target="_blank" rel="noopener">
+                <span class="icon" aria-hidden="true">
+                  <img alt="TikTok" src="https://cdn.simpleicons.org/tiktok/FFFFFF" />
+                </span>
+                <span class="meta">
+                  <p class="label">TikTok (Shop)</p>
+                  <p class="sub">@chrishasdeals</p>
+                </span>
+                <span class="chev">›</span>
+              </a>
+              <a class="row" href="https://www.tiktok.com/@chriseck02" target="_blank" rel="noopener">
+                <span class="icon" aria-hidden="true">
+                  <img alt="TikTok" src="https://cdn.simpleicons.org/tiktok/FFFFFF" />
+                </span>
+                <span class="meta">
+                  <p class="label">TikTok (Influencer)</p>
+                  <p class="sub">@chriseck02</p>
+                </span>
+                <span class="chev">›</span>
+              </a>
+
+              <a class="row" href="https://www.instagram.com/chris_eck_?igsh=d3N2ejNmMGR4eG1o" target="_blank" rel="noopener">
+                <span class="icon" aria-hidden="true">
+                  <img alt="Instagram" src="https://cdn.simpleicons.org/instagram/E4405F" />
+                </span>
+                <span class="meta">
+                  <p class="label">Instagram</p>
+                  <p class="sub">@chris_eck_</p>
+                </span>
+                <span class="chev">›</span>
+              </a>
+
+              <a class="row" href="https://www.facebook.com/share/1ULSDMhaj8/" target="_blank" rel="noopener">
+                <span class="icon" aria-hidden="true">
+                  <img alt="Facebook" src="https://cdn.simpleicons.org/facebook/1877F2" />
+                </span>
+                <span class="meta">
+                  <p class="label">Facebook</p>
+                  <p class="sub">facebook.com/share/1ULSDMhaj8</p>
+                </span>
+                <span class="chev">›</span>
+              </a>
+            </div>
+          </section>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Generates a real .vcf file in-browser (no hosting needed)
+    (function(){
+      const btn = document.getElementById("downloadVcfBtn");
+      if(!btn) return;
+
+      btn.addEventListener("click", function(){
+        const vcf =
+
+  "BEGIN:VCARD\r\n" +
+  "VERSION:3.0\r\n" +
+  "N:Eck;Chris;;;\r\n" +
+  "FN:Chris Eck\r\n" +
+  "ORG:Chris Eck\r\n" +
+  "TITLE:Deals & Affiliate Collabs\r\n" +
+
+  // Website
+  "URL:https://chrishasdeals.com\r\n" +
+
+  // Emails
+  "EMAIL;TYPE=HOME:chris@chrishasdeals.com\r\n" +
+  "EMAIL;TYPE=WORK:collabs@chrishasdeals.com\r\n" +
+
+  // Social (as URLs)
+  "URL;TYPE=SOCIAL:https://www.tiktok.com/@chrishasdeals\r\n" +
+  "URL;TYPE=SOCIAL:https://www.tiktok.com/@chriseck02\r\n" +
+  "URL;TYPE=SOCIAL:https://www.instagram.com/chris_eck_\r\n" +
+  "URL;TYPE=SOCIAL:https://www.facebook.com/share/1ULSDMhaj8/\r\n" +
+
+  // Notes
+  "NOTE:Affiliate & collab inquiries: collabs@chrishasdeals.com\r\n" +
+
+  "END:VCARD\r\n";
+
+        const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Chris-Eck.vcf";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        setTimeout(() => URL.revokeObjectURL(url), 800);
+      });
+    })();
+  </script>
+  <script src="/assets/nav.js"></script>
+</body>
+</html>
