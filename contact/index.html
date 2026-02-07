@@ -113,9 +113,10 @@
 
     .menu-panel{
       position: absolute;
-      right: 0;
+      left: 0;
+      right: auto;
       top: 52px;
-      background: var(--panel);
+      background: #000000;
       border: 1px solid var(--stroke);
       border-radius: 14px;
       padding: 10px;
@@ -369,7 +370,7 @@
 
     @media (max-width: 720px){
       .links{ display: none; }
-      details.menu{ display: block; margin-left: auto; }
+      details.menu{ display: block; margin-right: auto; }
       .menu-panel{
         position: fixed;
         inset: 0;
@@ -378,6 +379,7 @@
         min-width: 0;
         padding: 18px 16px;
         box-shadow: none;
+        background: #000000;
       }
       .menu-panel a{
         font-size: 18px;
