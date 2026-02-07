@@ -121,6 +121,7 @@
       padding: 10px;
       min-width: 160px;
       box-shadow: var(--shadow);
+      z-index: 20;
     }
 
     .menu-panel a{
@@ -135,18 +136,30 @@
     }
 
     .page{
-      min-height:100vh;
+      min-height: calc(100vh - var(--nav-content-pad));
       display:flex;
       justify-content:center;
-      padding: var(--nav-content-pad) 12px 22px;
+      align-items:center;
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px 12px 22px;
     }
 
     .page-head{
-      margin: 6px auto 12px;
+      width:min(720px, 100%);
+      margin: 0 auto;
+      padding: 0 4px;
       text-align: center;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      font-size: 12px;
+      color: var(--muted);
     }
 
-    .wrap{ width:min(720px, 100%); }
+    .wrap{
+      width:min(720px, 100%);
+      margin: 0 auto;
+    }
 
     .panel{
       background: var(--panel);
@@ -356,7 +369,7 @@
 
     @media (max-width: 720px){
       .links{ display: none; }
-      details.menu{ display: block; }
+      details.menu{ display: block; margin-left: auto; }
     }
   </style>
   <!-- Google tag (gtag.js) -->
@@ -393,6 +406,7 @@
     </div>
   </nav>
   <div class="page">
+    <div class="page-head">Contact Info</div>
     <main class="wrap">
       <section class="panel">
         <header class="top">
