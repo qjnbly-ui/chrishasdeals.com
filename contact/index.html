@@ -145,6 +145,25 @@
 
     .menu-panel a:hover{ background: rgba(255,255,255,.1); }
 
+    .menu-close{
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .menu-close:hover{ background: rgba(255,255,255,.1); }
+
     .page{
       max-width: 860px;
       margin: 28px auto 70px;
@@ -322,7 +341,9 @@
 
     @media (max-width: 720px){
       .nav-links{ display: none; }
-      details.menu{ display: block; margin-right: auto; }
+      details.menu{ display: block; order: 1; }
+      .brand{ order: 2; }
+      .nav-shell{ justify-content: flex-start; gap: 14px; }
       .page{ margin: 16px auto 50px; }
     }
 
@@ -359,6 +380,7 @@
           </span>
         </summary>
         <div class="menu-panel" role="menu">
+          <button class="menu-close" type="button" aria-label="Close menu" data-menu-close>×</button>
           <a role="menuitem" href="/">Home</a>
           <a role="menuitem" href="/contact/">Contact</a>
         </div>
@@ -366,7 +388,7 @@
     </div>
   </nav>
 
-  <div class="page">
+  <div class="page" data-menu-close-surface>
     <div class="page-head">Contact Info</div>
     <main class="panel">
       <header class="top">
@@ -504,6 +526,21 @@
     </main>
   </div>
 
+  <script>
+    (() => {
+      const menu = document.querySelector('details.menu');
+      if (!menu) return;
+      const closeButtons = document.querySelectorAll('[data-menu-close]');
+      closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => { menu.open = false; });
+      });
+
+      const surfaces = document.querySelectorAll('[data-menu-close-surface]');
+      surfaces.forEach(surface => {
+        surface.addEventListener('click', () => { menu.open = false; });
+      });
+    })();
+  </script>
   <script>
     (() => {
       const downloadBtn = document.getElementById("downloadVcfBtn");
